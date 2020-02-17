@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Write a note</title>
+</head>
+
+<body>
+
+<div th:insert="fragments :: navbar"></div>
+<div th:insert="fragments :: remove-container-script"></div>
+
+<div class="container alert-container" th:if="${success == true}">
+    <div class="row mt-3">
+        <div class="col justify-content-center text-center">
+            <div class="alert alert-success" role="alert">
+                Note added successfully!
+                <button type="button" class="close" onclick="removeContainer()">
+                    <span>&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row my-3">
+        <div class="col">
+            <div class="card bg-dark text-white">
+                <form th:action="@{/notepad/create}" th:object="${note}" method="post">
+                    <div class="row my-3 justify-content-center text-center">
+                        <div class="col-md-4">
+                            <label class="label label-primary">User name: </label>
+                            <input type="text" class="form-control" th:field="*{creator.username}"
+                                   id="usernameField">
+                            <span class="text-danger" th:if="${#fields.hasErrors('creator.username')}"
+                                  th:errors="*{creator.username}"></span>
+                        </div>
+                    </div>
+                    <div class="row my-3 justify-content-center text-center">
+                        <div class="col-md-4">
+                            <label>Note text: </label>
+                        </div>
+                    </div>
+                    <div class="row my-3 justify-content-center text-center">
+                        <div class="col-md-6">
+                            <textarea class="form-control" style="resize: none" id="noteText" rows="20"
+                                      th:field="*{text}"></textarea>
+                            <span class="text-danger" th:if="${#fields.hasErrors('text')}"
+                                  th:errors="*{text}"></span>
+                        </div>
+                    </div>
+                    <div class="row my-3 justify-content-center">
+                        <button type="submit" class="btn btn-outline-light justify-content-center">Add note
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

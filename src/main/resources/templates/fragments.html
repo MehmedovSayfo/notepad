@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head></head>
+<body>
+
+<!--The navigation bar used in every page-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-contents-center" th:fragment="navbar">
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto text-center">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/notepad/create}">Write a note</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/notepad/view}">View all notes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/notepad/archive}">View note archive</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!--The script for hiding the alert div-->
+
+<div th:fragment="remove-container-script">
+    <script>
+        function removeContainer() {
+            var alerts = document.getElementsByClassName("container alert-container");
+            for(let i = 0; i < alerts.length; i++)
+            {
+                alerts[i].style.display = "none";
+            }
+        }
+    </script>
+</div>
+
+</body>
+</html>
